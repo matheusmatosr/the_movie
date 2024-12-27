@@ -1,7 +1,33 @@
+import React, { useState, useEffect } from "react";
+import { fetchMovies } from "../services/api";
+import MovieList from "../components/movieList";
+import "../style/home.css";
+import Search from "../components/search";
+
 function Home() {
+  const [movies, setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState("marvel");
+
+  useEffect(() => {
+    const fetchMovieData = async () => {
+      const movieData = await fetchMovies(searchValue);
+      setMovies(movieData);
+    };
+
+    fetchMovieData();
+  }, [searchValue]);
+
   return (
-    <div style={{ color: "black", marginLeft: "50px", marginTop: "150px"}}>
-      hello word
+    <div className="home-container">
+      <div className="header">
+        <h1 className="title">Filmes</h1>
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+      </div>
+      <MovieList
+        movies={movies}
+        handleFavouritesClick={() => {}}
+        favouriteComponent={() => <></>}
+      />
     </div>
   );
 }
