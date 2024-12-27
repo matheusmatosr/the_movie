@@ -1,7 +1,9 @@
+import RoutesApp from "./routes/route";
+
 function App() {
   return (
     <div className="App">
-      hello
+      <RoutesApp />
     </div>
   );
 }
