@@ -15,7 +15,7 @@ const MovieList = (props) => {
           </div>
         ))
       ) : (
-        <h4>Nenhum filme encontrado</h4>
+        <h4 className="movie-nothing">Nenhum filme encontrado</h4>
       )}
     </div>
   );

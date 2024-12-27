@@ -1,6 +1,5 @@
 .home-container {
   margin: 50px 20px;
-  padding-top: 50px; 
   padding-bottom: 80px;
   color: black;
 }
@@ -9,10 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .title {
+  width: 500px;
   font-size: 30px;
   margin-left: 25px;
   font-weight: bold;
@@ -35,6 +35,7 @@
   background: #f9f9f9;
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .movie-card img {
@@ -52,14 +53,14 @@
 }
 
 .movie-card .movie-type {
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
   margin-bottom: 5px;
   background: #f9f9f9;
 }
 
 .movie-card .movie-year {
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
   background: #f9f9f9;
 }
@@ -69,4 +70,19 @@
   text-align: left; 
   margin-bottom: 10px;
   background: #f9f9f9;
+}
+
+.movie-nothing {
+  font-size: 20px;
+  width: 250px;
+  margin-top: 25px;
+  margin-left: 50px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    width: 280px;
+    font-size: 25px;
+    margin-left: 10px;
+  }
 }
