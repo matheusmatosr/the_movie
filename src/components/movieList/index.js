@@ -12,6 +12,9 @@ const MovieList = (props) => {
               <div className="movie-year">Lançamento: {movie.Year}</div>
             </div>
             <img src={movie.Poster} alt={movie.Title} />
+            <div className="card-footer">
+              <button className="add-button">Adicionar</button>
+            </div>
           </div>
         ))
       ) : (

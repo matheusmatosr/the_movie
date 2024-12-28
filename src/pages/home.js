@@ -6,7 +6,7 @@ import Search from "../components/search";
 
 function Home() {
   const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState("marvel");
+  const [searchValue, setSearchValue] = useState("surf");
 
   useEffect(() => {
     const fetchMovieData = async () => {
