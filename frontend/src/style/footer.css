@@ -37,7 +37,7 @@ footer p {
 }
 
 @media (max-width: 768px) {
-  .footer {
+  footer {
     font-size: 14px;
   }
 }

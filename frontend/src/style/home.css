@@ -15,7 +15,8 @@
   width: 100%;
   font-size: 30px;
   margin-left: 70px;
-  font-family: 'Calibri', cursive;
+  font-family: 'Calibri';
+  font-weight: bold;
 } 
 
 .movie-list {
