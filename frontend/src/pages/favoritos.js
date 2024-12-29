@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import RatingForm from '../components/ratingForm';
 import '../style/favoritos.css';
 
 function Favoritos() {
   const [filmes, setFilmes] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     fetchFavorites();
@@ -42,11 +44,18 @@ function Favoritos() {
           <li key={item.imdbID}>
             <span>{item.title}</span>
             <div>
+              <button onClick={() => setSelectedMovie(item)} className="buttonAvaliar">Avaliar</button>
               <button onClick={() => excluirFilme(item.imdbID)} className="buttonExcluir">Excluir</button>
             </div>
           </li>
         ))}
       </ul>
+      {selectedMovie && (
+        <RatingForm 
+          movie={selectedMovie} 
+          onClose={() => setSelectedMovie(null)} 
+        />
+      )}
       <Link className="buttonEscolher" to="/">Escolher</Link>
     </div>
   );
