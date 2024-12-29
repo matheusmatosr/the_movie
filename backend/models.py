@@ -1,15 +1,25 @@
 from database import get_db_connection
 
 
+def get_next_id():
+    """Retorna o próximo ID sequencial baseado no número de registros no banco."""
+    conn = get_db_connection()
+    result = conn.execute("SELECT COUNT(*) AS total FROM favorites").fetchone()
+    conn.close()
+    return result["total"] + 1
+
+
 def add_to_favorites(movie):
     conn = get_db_connection()
     with conn:
+        next_id = get_next_id()
         conn.execute(
             """
-        INSERT INTO favorites (title, year, imdbID, type, poster)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO favorites (id, title, year, imdbID, type, poster)
+        VALUES (?, ?, ?, ?, ?, ?)
         """,
             (
+                next_id,
                 movie["Title"],
                 movie["Year"],
                 movie["imdbID"],
