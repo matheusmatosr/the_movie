@@ -1,36 +1,55 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/favoritos.css';
 
-function Favoritos(){
-  const [ filmes, setFilmes ] = useState([]);
- 
-  function excluirFilme(id){
-    let filtroFilmes = filmes.filter((item) => {
-      return (item.id !== id)
-    })
-    setFilmes(filtroFilmes);
-  }
+function Favoritos() {
+  const [filmes, setFilmes] = useState([]);
 
-  return(
-    <div className='meus-filmes'>
-      <h1>Meus filmes favotiros</h1>
-      {filmes.length === 0 && <span>Ops, você não tem nenhum filme salvo :( </span>}
+  useEffect(() => {
+    fetchFavorites();
+  }, []);
+
+  const fetchFavorites = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/favorites');
+      const data = await response.json();
+      setFilmes(data);
+    } catch (error) {
+      console.error('Erro ao buscar favoritos:', error);
+    }
+  };
+
+  const excluirFilme = async (imdbID) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/favorites/${imdbID}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setFilmes(filmes.filter((item) => item.imdbID !== imdbID));
+        alert('Filme removido dos favoritos!');
+      }
+    } catch (error) {
+      console.error('Erro ao excluir filme:', error);
+    }
+  };
+
+  return (
+    <div className="meus-filmes">
+      <h1>Meus filmes favoritos</h1>
+      {filmes.length === 0 && <span>Ops, você não tem nenhum filme salvo :(</span>}
       <ul>
-        {filmes.map((item) => {
-          return(
-            <li key={item.id}>
-              <span>{item.title}</span>
-              <div>
-                <button onClick={() => excluirFilme(item.id)} className="buttonExcluir">Excluir</button>
-              </div>
-            </li>
-          )
-        })}
+        {filmes.map((item) => (
+          <li key={item.imdbID}>
+            <span>{item.title}</span>
+            <div>
+              <button onClick={() => excluirFilme(item.imdbID)} className="buttonExcluir">Excluir</button>
+            </div>
+          </li>
+        ))}
       </ul>
-      <Link className='buttonEscolher' to="/">Escolher</Link>
+      <Link className="buttonEscolher" to="/">Escolher</Link>
     </div>
-  )
+  );
 }
 
 export default Favoritos;
