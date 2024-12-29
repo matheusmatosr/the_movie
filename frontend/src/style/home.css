@@ -11,11 +11,11 @@
   margin-bottom: 40px;
 }
 
-.title {
+.title-home {
   width: 100%;
   font-size: 30px;
   margin-left: 70px;
-  font-weight: bold;
+  font-family: 'Calibri', cursive;
 } 
 
 .movie-list {
@@ -78,9 +78,14 @@
 
 .movie-nothing {
   font-size: 20px;
-  width: 250px;
-  margin-top: 25px;
-  margin-left: 50px;
+  width: auto;
+  margin: 0;
+  position: absolute;
+  color: rgb(118, 22, 22);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .card-footer {
@@ -106,15 +111,8 @@
   background-color: #0056b3;
 }
 
-@media (max-width: 1080px) {
-  .title {
-    width: 100%;
-  }
-}
-
 @media (max-width: 768px) {
-  .title {
-    width: 280px;
+  .title-home {
     font-size: 25px;
     margin-left: 10px;
   }

@@ -81,11 +81,15 @@
   }
 
   .meus-filmes div a {
-      margin-right: 10px;
+    margin-right: 10px;
   }
 
   .meus-filmes button {
-      width: 40px;
-      font-size: 12px;
+    width: 40px;
+    font-size: 12px;
+  }
+
+  .meus-filmes ul {
+    width: 70%; 
   }
 }

@@ -20,7 +20,7 @@ function Home() {
   return (
     <div className="home-container">
       <div className="header">
-        <h1 className="title">Explore filmes e séries.</h1>
+        <h1 className="title-home">Explore filmes e séries.</h1>
         <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <MovieList
