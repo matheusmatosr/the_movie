@@ -11,7 +11,7 @@ function Footer() {
           rel="noopener noreferrer"
           className="footer-link"
         >
-          Matheus Matos Rodrigues
+          Matheus Matos
         </a>
       </p>
     </footer>
