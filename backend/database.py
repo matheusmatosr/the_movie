@@ -8,21 +8,32 @@ def get_db_connection():
     return conn
 
 
-# Função para inicializar o banco de dados
 def init_db():
     conn = get_db_connection()
     with conn:
         conn.execute(
             """
-        CREATE TABLE IF NOT EXISTS favorites (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            year TEXT NOT NULL,
-            imdbID TEXT UNIQUE NOT NULL,
-            type TEXT NOT NULL,
-            poster TEXT NOT NULL
+            CREATE TABLE IF NOT EXISTS favorites (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                year TEXT NOT NULL,
+                imdbID TEXT UNIQUE NOT NULL,
+                type TEXT NOT NULL,
+                poster TEXT NOT NULL
+            )
+            """
         )
-        """
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS reviews (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                favorite_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                rating INTEGER NOT NULL CHECK(rating >= 1 AND rating <= 10),
+                comment TEXT NOT NULL,
+                FOREIGN KEY (favorite_id) REFERENCES favorites(id) ON DELETE CASCADE
+            )
+            """
         )
     conn.close()
 
