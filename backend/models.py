@@ -42,3 +42,39 @@ def remove_from_favorites(imdbID):
     with conn:
         conn.execute("DELETE FROM favorites WHERE imdbID = ?", (imdbID,))
     conn.close()
+
+
+def add_review(favorite_id, name, rating, comment):
+    conn = get_db_connection()
+    with conn:
+        conn.execute(
+            """
+            INSERT INTO reviews (favorite_id, name, rating, comment)
+            VALUES (?, ?, ?, ?)
+            """,
+            (favorite_id, name, rating, comment),
+        )
+    conn.close()
+
+
+def get_review_by_favorite_id(favorite_id):
+    conn = get_db_connection()
+    review = conn.execute(
+        "SELECT * FROM reviews WHERE favorite_id = ?", (favorite_id,)
+    ).fetchone()
+    conn.close()
+    return dict(review) if review else None
+
+
+def update_review(favorite_id, name, rating, comment):
+    conn = get_db_connection()
+    with conn:
+        conn.execute(
+            """
+            UPDATE reviews
+            SET name = ?, rating = ?, comment = ?
+            WHERE favorite_id = ?
+            """,
+            (name, rating, comment, favorite_id),
+        )
+    conn.close()
