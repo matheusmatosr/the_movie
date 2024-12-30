@@ -50,15 +50,24 @@ def remove_from_favorites(imdbID):
     conn.close()
 
 
+def get_next_review_id():
+    """Retorna o próximo ID sequencial baseado no número de registros na tabela de avaliações."""
+    conn = get_db_connection()
+    result = conn.execute("SELECT COUNT(*) AS total FROM reviews").fetchone()
+    conn.close()
+    return result["total"] + 1
+
+
 def add_review(favorite_id, name, rating, comment):
     conn = get_db_connection()
     with conn:
+        next_id = get_next_review_id()
         conn.execute(
             """
-            INSERT INTO reviews (favorite_id, name, rating, comment)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO reviews (id, favorite_id, name, rating, comment)
+            VALUES (?, ?, ?, ?, ?)
             """,
-            (favorite_id, name, rating, comment),
+            (next_id, favorite_id, name, rating, comment),
         )
     conn.close()
 
