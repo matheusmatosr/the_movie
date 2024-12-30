@@ -40,6 +40,12 @@ def get_favorites():
 def remove_from_favorites(imdbID):
     conn = get_db_connection()
     with conn:
+        # Remove a avaliação associada
+        conn.execute(
+            "DELETE FROM reviews WHERE favorite_id = (SELECT id FROM favorites WHERE imdbID = ?)",
+            (imdbID,),
+        )
+        # Remove o filme dos favoritos
         conn.execute("DELETE FROM favorites WHERE imdbID = ?", (imdbID,))
     conn.close()
 

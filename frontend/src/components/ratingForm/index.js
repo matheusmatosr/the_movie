@@ -27,21 +27,43 @@ function RatingForm({ movie, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const review = { favorite_id: movie.id, name, rating, comment };
-
+  
     try {
-      const response = await fetch(`http://127.0.0.1:5000/reviews`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review),
-      });
-      if (response.ok) {
-        alert('Avaliação salva com sucesso!');
-        onClose();
+      // Verifica se já existe uma avaliação
+      const response = await fetch(`http://127.0.0.1:5000/reviews/${movie.id}`);
+      const existingReview = await response.json();
+  
+      if (response.ok && existingReview) {
+        // Se já existe uma avaliação, atualiza
+        const updateResponse = await fetch(`http://127.0.0.1:5000/reviews/${movie.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(review),
+        });
+  
+        if (updateResponse.ok) {
+          alert('Avaliação atualizada com sucesso!');
+          onClose();
+        } else {
+          alert('Erro ao atualizar avaliação');
+        }
+      } else {
+        // Se não existe, cria uma nova avaliação
+        const createResponse = await fetch(`http://127.0.0.1:5000/reviews`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(review),
+        });
+  
+        if (createResponse.ok) {
+          alert('Avaliação salva com sucesso!');
+          onClose();
+        }
       }
     } catch (error) {
       console.error('Erro ao salvar avaliação:', error);
     }
-  };
+  };  
 
   return (
     <div className="modal-overlay">
