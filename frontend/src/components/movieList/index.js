@@ -15,7 +15,7 @@ const MovieList = (props) => {
         alert('Filme adicionado aos favoritos!');
       } else {
         const error = await response.json();
-        alert(error.error);
+        alert('Filme já adicionado em favoritos!', error);
       }
     } catch (error) {
       console.error('Erro ao adicionar filme:', error);
