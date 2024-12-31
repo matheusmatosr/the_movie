@@ -81,7 +81,13 @@ cd frontend
 npm install
 ```
 
-4. Para rodar o projeto:
+4. Para adicionar o arquivo **.env** no raíz da projeto, ou seja, dentro da pasta do ./frontend e adicione no arquivo a chave com a seu Token da api:
+
+```bash
+REACT_APP_API_KEY="seu_token_aqui"
+```
+
+5. Para rodar o projeto:
 
 ```bash
 npm start
