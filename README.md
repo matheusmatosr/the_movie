@@ -83,3 +83,5 @@ npm start
 ```
 
 Acesse o projeto no navegador pelo link gerado no terminal (geralmente http://localhost:3000).
+
+<img src="./frontend/src/assets/the_movie.png" alt="Imagem do projeto" width="95%">
