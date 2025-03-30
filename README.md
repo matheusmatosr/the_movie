@@ -19,12 +19,6 @@ Siga o passo a passo para a criação do banco:
 
 O restante, é só rodar o backend para a criação das tabelas e inserir os dados através da interface.
 
-Existem duas tabelas no banco:
-- favorites = filmes favoritos
-- reviews = avaliação dos filmes favoritados 
-
-<img src="./backend/assets/canva.png" alt="Canva backend" width="450">
-
 ### 🖥️ Instalação
 
 1. Clone este repositório
